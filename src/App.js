@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
+import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import {HashRouter as Router, Route} from 'react-router-dom';
+import {Container} from 'semantic-ui-react';
 
 import Header from './components/Header/Header'
 
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Header />
+          <Header items={['home', 'about']}/>
         </div>
       </Router>
     );

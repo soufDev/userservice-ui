@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
+import React, {
+  Component
+} from 'react';
+import {
+  Menu,
+  Container
+} from 'semantic-ui-react';
+import {
+  withRouter
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const defaultProps = {
@@ -8,7 +15,9 @@ const defaultProps = {
 };
 
 const propTypes = {
-  history: PropTypes.shape({ push: PropTypes.func }),
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
 };
 
 class Header extends Component {
@@ -16,13 +25,18 @@ class Header extends Component {
     super(props);
   }
 
-  render() {
-    return (
-      <Menu fixed="top" size="huge" inverted color="blue">
+  menuItemRender(items) {
+      return (
         <Container>
-          <Menu.Item header name="home" onClick={(e, { name }) => console.log(name)}/>
-          <Menu.Item header name="about" onClick={(e, { name }) => console.log(name)}/>
-        </Container>
+          {items.map((item, key) => (<Menu.Item key={key} header name={item} onClick={(e, {name}) => console.log(name)}/>))}
+        </Container >
+      )
+  }
+  render() {
+    const { items } = this.props;
+    return (
+      <Menu fixed = "top" size = "huge" inverted color = "blue">
+        {this.menuItemRender(items)}
       </Menu>
     )
   }
