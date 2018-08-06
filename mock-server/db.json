@@ -1,21 +1,6 @@
 {
   "users": [
     {
-      "id": "5b681f779c0ea6b239727994",
-      "index": 4,
-      "guid": "9b3bfddf-bfa7-4367-9357-a2492c3a4e29",
-      "isActive": true,
-      "picture": "http://placehold.it/32x32",
-      "firstname": "Esperanza",
-      "lastname": "Odom",
-      "company": "SINGAVERA",
-      "email": "esperanza.odom@singavera.tv",
-      "phone": "+1 (835) 432-2381",
-      "address": "578 Dunham Place, Kylertown, American Samoa, 5235",
-      "about": "Amet aute pariatur minim sit ut cillum et consequat anim ut quis laboris tempor. In pariatur pariatur in mollit velit amet enim exercitation adipisicing ea officia nostrud amet ad. Velit fugiat amet eiusmod tempor quis mollit. Qui eiusmod incididunt labore laboris ut eu ea do labore dolore nulla tempor. Incididunt minim proident eiusmod Lorem tempor qui. Ex sunt laborum id nisi commodo anim nisi. Ipsum ullamco dolore mollit mollit cillum occaecat elit enim nisi anim.",
-      "username": "esperanza.odom"
-    },
-    {
       "id": "5b681f77e247a4e549f5a7ea",
       "index": 5,
       "guid": "4e6053f1-b1ab-4251-bf06-429e2234d135",

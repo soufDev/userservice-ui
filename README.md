@@ -1,3 +1,34 @@
-# UI for my user service
+## UI for my user service
 
-### I use React/Redux and Semantic UI
+### I'm working with React/Redux and Semantic UI
+
+#### to start the app 
+
+##### you have to start the mock-server & the react-app
+
+  * to start the mock-server
+    
+        yarn mock-server
+        
+       OR 
+       
+        npm start
+        
+  * to make the frontend start
+  
+        yarn start
+      
+      OR
+      
+        npm mock-server
+        
+  * you can check both of them on
+  
+       * mock server
+       
+              http://localhost:5000/users
+              
+       * frontend
+       
+              http://localhost:3000
+        
