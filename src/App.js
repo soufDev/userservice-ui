@@ -7,6 +7,8 @@ import Header from './components/Header/Header';
 
 import configureStore from './store';
 import './App.css';
+import Home from './components/Home/Home';
+import User from './components/user/User';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +25,10 @@ class App extends Component {
         <Router>
           <div>
             <Header items={['home', 'about']} />
+            <Container style={{ marginTop: '7em' }}>
+              <Route exact path='/' component={Home} />
+              <Route path='/user' component={User} />
+            </Container>
           </div>
         </Router>
       </Provider>

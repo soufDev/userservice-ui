@@ -1,6 +1,6 @@
 import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from '../actions/user';
 
-function userReducer(state = {
+export default function userReducer(state = {
   users: [],
 }, action) {
   switch (action.type) {
@@ -23,5 +23,3 @@ function userReducer(state = {
       return state;
   }
 }
-
-export default userReducer;

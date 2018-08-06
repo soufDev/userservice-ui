@@ -2,7 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import { Message } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import * as userActions from '../../actions/user';
+
+
+const defaultProps = {
+  isFetching: false,
+  message: null,
+};
+
+const propTypes = {
+  isFetching: PropTypes.bool,
+  message: PropTypes.string,
+  actions: PropTypes.shape({
+    fetchAll: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 class User extends Component {
   constructor(props) {
@@ -11,14 +27,21 @@ class User extends Component {
     // this.renderForm = this.renderForm.bind(this);
   }
 
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.fetchAll();
+  }
+
   renderForm() {
-    const { user } = this.props;
-    console.error({ user });
+    const { user, message } = this.props;
     return (
       <div>
         <h1>
           Form User
         </h1>
+        <h2>
+          {message && <Message error header={message} />}
+        </h2>
       </div>
     );
   }
@@ -36,10 +59,13 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.user.isFetching,
-    users: state.user.users,
-    message: state.user.message,
-    error: state.user.error,
+    isFetching: state.userReducer.isFetching,
+    users: state.userReducer.users,
+    message: state.userReducer.message,
+    error: state.userReducer.error,
   };
 }
+
+User.defaultProps = defaultProps;
+User.propTypes = propTypes;
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(User));

@@ -33,5 +33,6 @@ export const fetchAll = () => async (dispatcher) => {
     dispatcher(fetchSuccess(response.data));
   } catch (error) {
     dispatcher(fetchFailure(error.message));
+    return error.message
   }
 };

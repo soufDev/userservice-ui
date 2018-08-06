@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import { Menu, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 const defaultProps = {
-  items: [],
 };
 
 const propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 class Header extends Component {
   menuItemRender() {
-    const { items } = this.props;
+    const { history } = this.props;
     return (
       <Container>
-        {items.map((item, index) => (
-          <Menu.Item
-            key={index + 1}
-            header
-            name={item}
-            onClick={(e, { name }) => console.log(name)}
-          />
-        ))}
+        <Menu.Item
+          header
+          name="Home"
+          onClick={() => history.push('/')}
+        />
+        <Menu.Item
+          header
+          name="User"
+          onClick={() => history.push('/user')}
+        />
       </Container>
     );
   }
@@ -39,4 +43,4 @@ class Header extends Component {
 Header.defaultProps = defaultProps;
 Header.propTypes = propTypes;
 
-export default Header;
+export default withRouter(Header);
