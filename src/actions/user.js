@@ -1,4 +1,5 @@
 import axios from 'axios';
+import API_PATH from '../utils/constUrls';
 
 export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -26,13 +27,12 @@ export const fetchAll = () => async (dispatcher) => {
   dispatcher(fetchRequest());
   try {
     const response = await axios({
-      url: '/api/user',
+      url: `${API_PATH}/users`,
       method: 'GET',
       responseType: 'json',
     });
     dispatcher(fetchSuccess(response.data));
   } catch (error) {
     dispatcher(fetchFailure(error.message));
-    return error.message
   }
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Message } from 'semantic-ui-react';
+import { Message, Grid, Loader, Table, Icon, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import * as userActions from '../../actions/user';
 
@@ -32,16 +32,62 @@ class User extends Component {
     actions.fetchAll();
   }
 
+  renderTableData() {
+    const { users } = this.props;
+    return users.map((user, index) => (
+      <Table.Row key={index}>
+        <Table.Cell>{index + 1}</Table.Cell>
+        <Table.Cell>{user.username}</Table.Cell>
+        <Table.Cell>{user.email}</Table.Cell>
+        <Table.Cell>{user.firstname}</Table.Cell>
+        <Table.Cell>{user.lastname}</Table.Cell>
+        <Table.Cell>
+          <Button floated="left" onClick={() => this.props.history.push(`user/delete/${user.id}`)}>
+            <Icon name="delete" />
+            Delete
+          </Button>
+        </Table.Cell>
+      </Table.Row>
+    ));
+  }
+
+  renderTable() {
+    const { isFetching, message } = this.props;
+    return (
+      <Grid centered>
+        <Grid.Row>
+          <Loader active={isFetching} inline />
+          {message && <Message error header={message} />}
+        </Grid.Row>
+        {!isFetching && (
+        <Grid.Row>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>#</Table.HeaderCell>
+                <Table.HeaderCell>Username</Table.HeaderCell>
+                <Table.HeaderCell>Email</Table.HeaderCell>
+                <Table.HeaderCell>First Name</Table.HeaderCell>
+                <Table.HeaderCell>Last Name</Table.HeaderCell>
+                <Table.HeaderCell />
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.renderTableData()}
+            </Table.Body>
+          </Table>
+        </Grid.Row>)}
+      </Grid>
+    );
+  }
+
   renderForm() {
-    const { user, message } = this.props;
     return (
       <div>
         <h1>
           Form User
         </h1>
-        <h2>
-          {message && <Message error header={message} />}
-        </h2>
+        {this.renderTable()}
       </div>
     );
   }
