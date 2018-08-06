@@ -1,4 +1,7 @@
 import {
+  DELETE_USER_FAILURE,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
   FETCH_USER_FAILURE,
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
@@ -60,6 +63,23 @@ export default function userReducer(state = {
         ...state,
         user: { ...action.user },
         error: false,
+      };
+    case DELETE_USER_REQUEST:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        error: true,
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        status: action.status,
       };
     default:
       return state;

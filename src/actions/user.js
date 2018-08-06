@@ -109,4 +109,41 @@ export const updateUser = user => async (dispatcher) => {
   } catch (e) {
     dispatcher(updateFailure(e.message));
   }
-}
+};
+
+export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
+export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+
+const deleteRequest = () => ({
+  type: DELETE_USER_REQUEST,
+  isFetching: true,
+});
+
+const deleteFailure = message => ({
+  type: DELETE_USER_FAILURE,
+  message,
+  isFetching: false,
+});
+
+const deleteSuccess = status => ({
+  type: DELETE_USER_SUCCESS,
+  status,
+  isFetching: false,
+});
+
+export const deleteUser = id => async (dispatch) => {
+  dispatch(deleteRequest());
+  const url = `${API_PATH}/users/${id}`;
+  try {
+    const response = await axios({
+      url,
+      method: 'DELETE',
+      responseType: 'json',
+    });
+    dispatch(deleteSuccess(response.status));
+  } catch (e) {
+    dispatch(deleteFailure(e.message));
+  }
+};
+
