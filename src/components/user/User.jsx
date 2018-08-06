@@ -10,6 +10,7 @@ import * as userActions from '../../actions/user';
 const defaultProps = {
   isFetching: false,
   message: null,
+  users: [],
 };
 
 const propTypes = {
@@ -33,7 +34,7 @@ class User extends Component {
   }
 
   renderTableData() {
-    const { users } = this.props;
+    const { users, isFetching } = this.props;
     return users.map((user, index) => (
       <Table.Row key={index}>
         <Table.Cell>{index + 1}</Table.Cell>
@@ -42,9 +43,15 @@ class User extends Component {
         <Table.Cell>{user.firstname}</Table.Cell>
         <Table.Cell>{user.lastname}</Table.Cell>
         <Table.Cell>
-          <Button floated="left" onClick={() => this.props.history.push(`user/delete/${user.id}`)}>
-            <Icon name="delete" />
-            Delete
+          <Button color="red" onClick={() => this.props.history.push(`user/delete/${user.id}`)}>
+            {!isFetching && <Icon name="remove" />}
+            {isFetching && <Icon loading name="spinner" />}
+          </Button>
+          <Button color="green" onClick={() => this.props.history.push(`user/edit/${user.id}`)}>
+            <Icon name="edit" />
+          </Button>
+          <Button color="blue" onClick={() => this.props.history.push(`user/delete/${user.id}`)}>
+            <Icon name="zoom" />
           </Button>
         </Table.Cell>
       </Table.Row>

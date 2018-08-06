@@ -23,24 +23,23 @@ const propTypes = {
     firstname: PropTypes.string,
     email: PropTypes.string,
     about: PropTypes.string,
-    password: PropTypes.string
   }),
   edit: PropTypes.bool,
   isFetching: PropTypes.bool,
 };
 
-const UserForm = ({ defaultValue, onChange, isFetching, edit }) => (
+const UserForm = ({ defaultValue, onChange, isFetching }) => (
   <div>
     <Form loading={isFetching}>
       <Form.Field required>
         <label htmlFor="username">Username</label>
         <input type="text" onChange={onChange} name="username" value={defaultValue.username} />
       </Form.Field>
-      <Form.Field required>
+      <Form.Field>
         <label htmlFor="firstname">First Name</label>
         <input type="text" onChange={onChange} name="firstname" value={defaultValue.firstname} />
       </Form.Field>
-      <Form.Field required>
+      <Form.Field>
         <label htmlFor="lastname">Last Name</label>
         <input type="text" onChange={onChange} name="lastname" value={defaultValue.lastname} />
       </Form.Field>
@@ -48,16 +47,10 @@ const UserForm = ({ defaultValue, onChange, isFetching, edit }) => (
         <label htmlFor="email">email</label>
         <input type="email" onChange={onChange} name="email" value={defaultValue.email} />
       </Form.Field>
-      <Form.Field required>
+      <Form.Field>
         <label htmlFor="about">About</label>
-        <input type="text" onChange={onChange} name="text" value={defaultValue.text} />
+        <input type="text" onChange={onChange} name="text" value={defaultValue.about} />
       </Form.Field>
-      {!edit && (
-        <Form.Field required>
-          <label htmlFor="password">Password</label>
-          <input type="password" onChange={onChange} name="password" value={defaultValue.password} />
-        </Form.Field>
-      )}
     </Form>
   </div>
 );

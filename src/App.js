@@ -9,6 +9,7 @@ import configureStore from './store';
 import './App.css';
 import Home from './components/Home/Home';
 import User from './components/user/User';
+import UserEdit from './components/user/UserEdit';
 
 class App extends Component {
   constructor(props) {
@@ -26,8 +27,11 @@ class App extends Component {
           <div>
             <Header items={['home', 'about']} />
             <Container style={{ marginTop: '7em' }}>
-              <Route exact path='/' component={Home} />
-              <Route path='/user' component={User} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/user" component={User} />
+              <Route exact path="/user/edit/:id" component={UserEdit} />
+              <Route exact path="/user/delete/:id" component={User} />
+              <Route exact path="/user/detail/:id" component={User} />
             </Container>
           </div>
         </Router>
