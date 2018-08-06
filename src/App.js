@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div>
+          <React.Fragment>
             <Header items={['home', 'about']} />
             <Container style={{ marginTop: '7em' }}>
               <Route exact path="/" component={Home} />
@@ -33,7 +33,7 @@ class App extends Component {
               <Route exact path="/user/delete/:id" component={User} />
               <Route exact path="/user/detail/:id" component={User} />
             </Container>
-          </div>
+          </React.Fragment>
         </Router>
       </Provider>
     );

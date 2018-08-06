@@ -90,12 +90,12 @@ class User extends Component {
 
   renderForm() {
     return (
-      <div>
+      <React.Fragment>
         <h1>
           Form User
         </h1>
         {this.renderTable()}
-      </div>
+      </React.Fragment>
     );
   }
 

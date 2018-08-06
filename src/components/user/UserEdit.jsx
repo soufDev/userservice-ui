@@ -76,7 +76,7 @@ class UserEdit extends Component {
     const { isFetching, message } = this.props;
     const { user } = this.state;
     return (
-      <div>
+      <React.Fragment>
         {message && <Message error header={message} />}
         <hr/>
         <UserForm defaultValue={user} edit={true} isFetching={isFetching} onChange={this.onChange} />
@@ -89,7 +89,7 @@ class UserEdit extends Component {
             <Button loading={isFetching} onClick={this.cancelUpdate}>Cancel</Button>
           </Grid.Column>
         </Grid>
-      </div>
+      </React.Fragment>
     )
   }
 

@@ -29,7 +29,7 @@ const propTypes = {
 };
 
 const UserForm = ({ defaultValue, onChange, isFetching }) => (
-  <div>
+  <React.Fragment>
     <Form loading={isFetching}>
       <Form.Field required>
         <label htmlFor="username">Username</label>
@@ -52,7 +52,7 @@ const UserForm = ({ defaultValue, onChange, isFetching }) => (
         <input type="text" onChange={onChange} name="text" value={defaultValue.about} />
       </Form.Field>
     </Form>
-  </div>
+  </React.Fragment>
 );
 
 UserForm.propTypes = propTypes;
