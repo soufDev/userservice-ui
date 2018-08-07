@@ -11,6 +11,7 @@ import Home from './components/Home/Home';
 import User from './components/user/User';
 import UserEdit from './components/user/UserEdit';
 import UserDelete from './components/user/UserDelete';
+import UserDetail from "./components/user/UserDetail";
 
 
 class App extends Component {
@@ -33,7 +34,7 @@ class App extends Component {
               <Route exact path="/user" component={User} />
               <Route exact path="/user/edit/:id" component={UserEdit} />
               <Route exact path="/user/delete/:id" component={UserDelete} />
-              <Route exact path="/user/detail/:id" component={User} />
+              <Route exact path="/user/detail/:id" component={UserDetail} />
             </Container>
           </React.Fragment>
         </Router>

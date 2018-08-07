@@ -50,7 +50,7 @@ class User extends Component {
           <Button color="green" onClick={() => this.props.history.push(`user/edit/${user.id}`)}>
             <Icon name="edit" />
           </Button>
-          <Button color="blue" onClick={() => this.props.history.push(`user/delete/${user.id}`)}>
+          <Button color="blue" onClick={() => this.props.history.push(`user/detail/${user.id}`)}>
             <Icon name="zoom" />
           </Button>
         </Table.Cell>
