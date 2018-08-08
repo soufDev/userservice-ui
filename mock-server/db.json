@@ -1,21 +1,6 @@
 {
   "users": [
     {
-      "id": "5b681f77e247a4e549f5a7ea",
-      "index": 5,
-      "guid": "4e6053f1-b1ab-4251-bf06-429e2234d135",
-      "isActive": false,
-      "picture": "http://placehold.it/32x32",
-      "firstname": "Nicholson",
-      "lastname": "Chaney",
-      "company": "XUMONK",
-      "email": "nicholson.chaney@xumonk.me",
-      "phone": "+1 (859) 496-2516",
-      "address": "839 Hampton Place, Tyhee, Utah, 3013",
-      "about": "Magna elit velit aliquip deserunt consectetur duis. Nulla occaecat est laboris incididunt aute cupidatat aute consequat magna elit consequat. Nisi voluptate et veniam sint minim sint id eiusmod voluptate adipisicing Lorem ullamco deserunt. Aute adipisicing officia sint culpa mollit sunt consequat officia laborum cupidatat do adipisicing ut. Commodo ullamco consectetur amet adipisicing veniam velit magna velit et sunt ad ullamco proident. Non eu tempor Lorem ea ex laboris esse aute incididunt aute aliqua deserunt et aute.",
-      "username": "nicholson.chaney"
-    },
-    {
       "id": "5b681f775c9c618979dff0b2",
       "index": 6,
       "guid": "4608c52f-e3d6-4a21-8de6-0613420b7f57",

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import Header from './components/Header/Header';
@@ -11,7 +11,7 @@ import Home from './components/Home/Home';
 import User from './components/user/User';
 import UserEdit from './components/user/UserEdit';
 import UserDelete from './components/user/UserDelete';
-import UserDetail from "./components/user/UserDetail";
+import UserDetail from './components/user/UserDetail';
 
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       error: false,
-    }
+    };
   }
 
   render() {
