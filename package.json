@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "mock-server": "json-server -w ./mock-server/db.json --port 5000"
+    "mock-server": "./node_modules/json-server/bin -w ./mock-server/db.json --port 5000"
   },
   "devDependencies": {
     "enzyme-adapter-react-16": "^1.1.1",

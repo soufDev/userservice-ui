@@ -20,7 +20,7 @@
       
       OR
       
-        npm mock-server
+        npm run mock-server
         
   * you can check both of them on
   
