@@ -12,7 +12,7 @@
         
        OR 
        
-        npm start
+        npm run mock-server
         
   * to make the frontend start
   
@@ -20,7 +20,7 @@
       
       OR
       
-        npm run mock-server
+        yarn mock-server
         
   * you can check both of them on
   
