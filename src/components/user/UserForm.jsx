@@ -11,8 +11,8 @@ const defaultProps = {
     lastname: '',
     email: '',
     about: '',
-    password: ''
-  }
+    password: '',
+  },
 };
 
 const propTypes = {

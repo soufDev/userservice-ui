@@ -1,124 +1,150 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Button, Grid, Message } from "semantic-ui-react";
+import { useSelector, useDispatch } from 'react-redux';
+import { Button, Grid, Message } from 'semantic-ui-react';
 
 import * as userActions from '../../actions/user';
-import UserForm from "./UserForm";
+import UserForm from './UserForm';
 
 const defaultValue = {
-  message: undefined,
-  isFetching: null,
-  history: null,
+    history: null,
+    match: null
 };
 
 const propTypes = {
-  message: PropTypes.string,
-  isFetching: PropTypes.bool,
-  actions: PropTypes.shape({
-    getUser: PropTypes.func,
-    updateUser: PropTypes.func,
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+    match: PropTypes.shape({
+        params: PropTypes.shape({})
+    }),
+    history: PropTypes.shape({
+        push: PropTypes.func
+    })
 };
 
-class UserEdit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {}
-    };
-    this.onChange = this.onChange.bind(this);
-    this.renderForm = this.renderForm.bind(this);
-    this.checkResult = this.checkResult.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-    this.cancelUpdate = this.cancelUpdate.bind(this);
-  }
+const initialState = {
+    user: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        username: '',
+        about: ''
+    }
+};
 
-  componentDidMount() {
-    const { actions } = this.props;
-    const { params } = this.props.match;
-    actions.getUser(params.id).then(() => {
-      const { user } = this.props;
-      this.setState({ user: {...user} });
-    });
-  }
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'INIT':
+            return {
+                ...state,
+                user: { ...action.user }
+            };
+        case 'UPDATE':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    [action.name]: action.value
+                }
+            };
+        default: return state;
+    }
+};
 
-  onChange(e) {
-    let { user } = this.state;
-    user[`${e.target.name}`] = e.target.value;
-    this.setState({ user });
-  }
+export function useActions (actions, deps) {
+    const dispatch = useDispatch();
+    return React.useMemo(() => {
+        if (Array.isArray(actions)) {
+            return actions.map(a => bindActionCreators(a, dispatch));
+        }
+        return bindActionCreators(actions, dispatch);
+    }, deps ? [dispatch, ...deps] : deps);
+}
 
-  updateUser() {
-    const { user } = this.state;
-    console.log(user);
-    console.log(this.state.user);
-    const { actions } = this.props;
-    actions.updateUser(user).then(() => {
-      this.checkResult();
-    });
-  }
+const UserEdit = (props) => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+    const {
+        message, error, isFetching, user
+    } = useSelector(({ userReducer }) => userReducer);
+    const actions = useActions(userActions);
+    const { match: { params } } = props;
+    React.useEffect(() => {
+        actions.getUser(params.id);
+    }, []);
 
-  checkResult() {
-    const { error } = this.props;
-    if (!error) this.props.history.push('/user');
-  }
+    React.useEffect(() => {
+        dispatch({ type: 'INIT', user });
+    }, [user]);
+    function onChange (e) {
+        const { name, value } = e.target;
+        dispatch({ type: 'UPDATE', value, name });
+    }
 
-  cancelUpdate() {
-    this.props.history.push('/user');
-  }
-  renderForm() {
-    const { isFetching, message } = this.props;
-    const { user } = this.state;
+    function checkResult () {
+        if (!error) props.history.push('/user');
+    }
+
+    function updateUser () {
+        actions.updateUser(state.user).then(() => {
+            checkResult();
+        });
+    }
+
+
+    function cancelUpdate () {
+        props.history.push('/user');
+    }
+
     return (
-      <React.Fragment>
-        {message && <Message error header={message} />}
-        <hr/>
-        <UserForm defaultValue={user} edit={true} isFetching={isFetching} onChange={this.onChange} />
-        <hr/>
-        <Grid>
-          <Grid.Column width={2} floated="right">
-            <Button color="green" loading={isFetching} onClick={this.updateUser}>Submit</Button>
-          </Grid.Column>
-          <Grid.Column width={6} floated="right">
-            <Button loading={isFetching} onClick={this.cancelUpdate}>Cancel</Button>
-          </Grid.Column>
-        </Grid>
-      </React.Fragment>
-    )
-  }
+        <div>
+            <h1>Edit</h1>
+            <Form
+                message={message}
+                user={state.user}
+                isFetching={isFetching}
+                onChange={onChange}
+                updateUser={updateUser}
+                cancelUpdate={cancelUpdate}
+            />
+        </div>
+    );
+};
 
-  render() {
+function Form ({
+    message, user, isFetching, onChange, updateUser, cancelUpdate
+}) {
     return (
-      <div>
-        <h1>USER EDIT</h1>
-        {this.renderForm()}
-      </div>
-    )
-  }
+        <React.Fragment>
+            {message && <Message error header={message} />}
+            <hr />
+            <UserForm defaultValue={user} edit isFetching={isFetching} onChange={onChange} />
+            <hr />
+            <Grid>
+                <Grid.Column width={2} floated="right">
+                    <Button color="green" loading={isFetching} onClick={updateUser}>Submit</Button>
+                </Grid.Column>
+                <Grid.Column width={6} floated="right">
+                    <Button loading={isFetching} onClick={cancelUpdate}>Cancel</Button>
+                </Grid.Column>
+            </Grid>
+        </React.Fragment>
+    );
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(userActions, dispatch),
-  }
-}
+Form.defaultProps = {
+    message: null,
+    isFetching: null
+};
+Form.propTypes = {
+    message: PropTypes.string,
+    user: PropTypes.shape({}).isRequired,
+    isFetching: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
+    updateUser: PropTypes.func.isRequired,
+    cancelUpdate: PropTypes.func.isRequired
+};
 
-function mapStateToProps(state) {
-  return {
-    message: state.userReducer.message,
-    error: state.userReducer.error,
-    user: state.userReducer.user,
-    users: state.userReducer.users,
-    isFetching: state.userReducer.isFetching,
-  }
-}
 UserEdit.defaultProps = defaultValue;
 UserEdit.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UserEdit));
+export default withRouter(UserEdit);

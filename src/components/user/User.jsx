@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Message, Grid, Loader, Table, Icon, Button } from 'semantic-ui-react';
+import {
+ Message, Grid, Loader, Table, Icon, Button 
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import * as userActions from '../../actions/user';
 
@@ -10,7 +12,6 @@ import * as userActions from '../../actions/user';
 const defaultProps = {
   isFetching: false,
   message: null,
-  users: [],
 };
 
 const propTypes = {
@@ -83,7 +84,8 @@ class User extends Component {
               {this.renderTableData()}
             </Table.Body>
           </Table>
-        </Grid.Row>)}
+        </Grid.Row>
+)}
       </Grid>
     );
   }
